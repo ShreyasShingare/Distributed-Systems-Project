@@ -1,0 +1,7 @@
+com/apartmentcommunity/amenity/repository/AmenityRepository.class
+com/apartmentcommunity/amenity/service/AmenityService.class
+com/apartmentcommunity/amenity/config/CorsConfig$1.class
+com/apartmentcommunity/amenity/config/CorsConfig.class
+com/apartmentcommunity/amenity/AmenityServiceApplication.class
+com/apartmentcommunity/amenity/model/Amenity.class
+com/apartmentcommunity/amenity/controller/AmenityController.class
