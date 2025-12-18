@@ -1,0 +1,6 @@
+/Users/abhijit/Desktop/Distributed Project/services/amenity-service/src/main/java/com/apartmentcommunity/amenity/AmenityServiceApplication.java
+/Users/abhijit/Desktop/Distributed Project/services/amenity-service/src/main/java/com/apartmentcommunity/amenity/config/CorsConfig.java
+/Users/abhijit/Desktop/Distributed Project/services/amenity-service/src/main/java/com/apartmentcommunity/amenity/controller/AmenityController.java
+/Users/abhijit/Desktop/Distributed Project/services/amenity-service/src/main/java/com/apartmentcommunity/amenity/model/Amenity.java
+/Users/abhijit/Desktop/Distributed Project/services/amenity-service/src/main/java/com/apartmentcommunity/amenity/repository/AmenityRepository.java
+/Users/abhijit/Desktop/Distributed Project/services/amenity-service/src/main/java/com/apartmentcommunity/amenity/service/AmenityService.java
