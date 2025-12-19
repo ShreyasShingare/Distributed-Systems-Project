@@ -1,0 +1,4 @@
+com/apartmentcommunity/notification/config/RabbitMQQueueConfig.class
+com/apartmentcommunity/notification/service/BookingNotificationListener.class
+com/apartmentcommunity/notification/config/RabbitMQConfig.class
+com/apartmentcommunity/notification/NotificationServiceApplication.class
