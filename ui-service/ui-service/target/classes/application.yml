@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ui-service
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+server:
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.apartmentcommunity.ui: INFO
