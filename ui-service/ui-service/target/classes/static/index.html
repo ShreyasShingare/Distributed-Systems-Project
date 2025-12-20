@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amenity Booking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Amenity Booking System</h1>
+            <div id="user-info" class="hidden">
+                <span>Logged in as: <strong id="username-display"></strong> <span id="admin-badge" class="admin-badge hidden">(Admin)</span></span>
+                <button id="admin-dashboard-btn" class="admin-btn hidden">Admin Dashboard</button>
+                <button id="logout-btn">Logout</button>
+            </div>
+        </header>
+
+        <!-- Login/Register Section -->
+        <div id="auth-section">
+            <div class="auth-tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
+
+            <div id="login-form" class="auth-form">
+                <h2>Login</h2>
+                <form id="login-form-element">
+                    <div class="form-group">
+                        <label for="login-username">Username:</label>
+                        <input type="text" id="login-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password:</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <div id="login-error" class="error hidden"></div>
+            </div>
+
+            <div id="register-form" class="auth-form hidden">
+                <h2>Register</h2>
+                <form id="register-form-element">
+                    <div class="form-group">
+                        <label for="register-username">Username:</label>
+                        <input type="text" id="register-username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Password:</label>
+                        <input type="password" id="register-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-name">Name:</label>
+                        <input type="text" id="register-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-flat-no">Flat No:</label>
+                        <input type="text" id="register-flat-no" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-contact">Contact Number:</label>
+                        <input type="tel" id="register-contact" required>
+                    </div>
+                    <button type="submit">Register</button>
+                </form>
+                <div id="register-error" class="error hidden"></div>
+            </div>
+        </div>
+
+        <!-- Booking Section -->
+        <div id="booking-section" class="hidden">
+            <div class="booking-controls">
+                <div class="form-group">
+                    <label for="amenity-select">Select Amenity:</label>
+                    <select id="amenity-select">
+                        <option value="">Loading...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date-picker">Select Date:</label>
+                    <input type="date" id="date-picker" required>
+                </div>
+                <button id="load-slots-btn">Load Time Slots</button>
+            </div>
+
+            <div id="slots-container"></div>
+
+            <div id="my-bookings-section">
+                <h2>My Bookings</h2>
+                <button id="load-bookings-btn">Refresh My Bookings</button>
+                <div id="bookings-list"></div>
+            </div>
+
+            <!-- Admin Dashboard Section -->
+            <div id="admin-dashboard-section" class="hidden">
+                <h2>Admin Dashboard</h2>
+                <div class="admin-controls">
+                    <button id="load-all-bookings-btn">Load All Bookings</button>
+                    <button id="load-stats-btn">View Statistics</button>
+                    <div class="form-group">
+                        <label for="admin-amenity-filter">Filter by Amenity:</label>
+                        <select id="admin-amenity-filter">
+                            <option value="">All Amenities</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="admin-bookings-list"></div>
+                <div id="admin-stats"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
