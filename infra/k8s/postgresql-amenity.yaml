@@ -1,0 +1,68 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: amenity-db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amenity-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amenity-db
+  template:
+    metadata:
+      labels:
+        app: amenity-db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_DB
+          value: amenity_db
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+        livenessProbe:
+          tcpSocket:
+            port: 5432
+          initialDelaySeconds: 300
+          periodSeconds: 20
+          timeoutSeconds: 5
+        readinessProbe:
+          tcpSocket:
+            port: 5432
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          timeoutSeconds: 5
+      volumes:
+      - name: postgres-storage
+        persistentVolumeClaim:
+          claimName: amenity-db-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: amenity-db
+spec:
+  selector:
+    app: amenity-db
+  ports:
+  - port: 5432
+    targetPort: 5432
+  type: ClusterIP

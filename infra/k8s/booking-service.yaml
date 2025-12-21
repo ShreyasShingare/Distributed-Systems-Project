@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: booking-service
+  template:
+    metadata:
+      labels:
+        app: booking-service
+    spec:
+      containers:
+      - name: booking-service
+        image: shreyas900/booking-service:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_HOST
+          value: booking-db
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: booking_db
+        - name: DB_USER
+          value: postgres
+        - name: DB_PASSWORD
+          value: postgres
+        - name: RABBITMQ_HOST
+          value: rabbitmq
+        - name: RABBITMQ_PORT
+          value: "5672"
+        - name: RABBITMQ_USER
+          value: guest
+        - name: RABBITMQ_PASSWORD
+          value: guest
+        - name: USER_SERVICE_URL
+          value: http://user-service:80
+        - name: SERVER_PORT
+          value: "8082"
+        ports:
+        - containerPort: 8082
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8082
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8082
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking-service
+spec:
+  selector:
+    app: booking-service
+  ports:
+  - port: 8082
+    targetPort: 8082
+  type: ClusterIP

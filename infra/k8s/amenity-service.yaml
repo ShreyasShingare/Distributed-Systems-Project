@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: amenity-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: amenity-service
+  template:
+    metadata:
+      labels:
+        app: amenity-service
+    spec:
+      containers:
+      - name: amenity-service
+        image: shreyas900/amenity-service:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: DB_HOST
+          value: amenity-db
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_NAME
+          value: amenity_db
+        - name: DB_USER
+          value: postgres
+        - name: DB_PASSWORD
+          value: postgres
+        - name: SERVER_PORT
+          value: "8081"
+        ports:
+        - containerPort: 8081
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8081
+          initialDelaySeconds: 30
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: amenity-service
+spec:
+  selector:
+    app: amenity-service
+  ports:
+  - port: 8081
+    targetPort: 8081
+  type: ClusterIP
